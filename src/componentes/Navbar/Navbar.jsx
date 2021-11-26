@@ -27,7 +27,7 @@ function Navbar() {
                 </li>
                 <li className="nav-item">
                     <Link to={`/cart`}>
-                <a className="nav-link" href="#"><CartWidget/>0</a>
+                <a className="nav-link" href="#"><CartWidget/></a>
                 </Link>
                 </li>
             </ul>

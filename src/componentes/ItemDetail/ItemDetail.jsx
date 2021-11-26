@@ -24,8 +24,9 @@ const ItemDetail = ({item}) => {
 
               {show? 
               ( <ItemCount mostrar={show} setMostrar={setShow} item={item} onAdd={onAdd} initial={1}/> )
-              : ( <Link to={`/cart`}> <button className="btn btn-warning botones p-3 m-3" onClick={()=>setShow(!show)}>Finalizar Compra</button></Link> )}              
-            </div>                    
+              : ( <Link to={`/cart`}> <button className="btn btn-warning botones p-3 m-3" onClick={()=>setShow(!show)}>Finalizar Compra</button></Link> )} 
+                <Link to={"/productos"}> <button className="btn btn-warning botones p-3 m-3" onClick={()=>setShow(!show)}>Seguir Comprando</button></Link>           
+            </div>                 
       </div> 
     );
 };
