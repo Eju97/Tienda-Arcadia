@@ -10,21 +10,42 @@ export const useCartContext = () => useContext(CartContext);
 function CartContextProvider({children}){
     const [cartList, setCartList] = useState([])
 
-    const agregarItem=(newItem, newQuantity, mostrar, setMostrar)=>{
-        const evitarDuplicado = cartList.find((item) => {
-            return item.item.nombre === newItem.nombre});
-        let newCart;
-        let qty;
-        if(evitarDuplicado) {
-            newCart = cartList.filter((item) => item.item.nombre !== newItem.nombre);
-            qty = evitarDuplicado.quantity + newQuantity
-        } else {
-            newCart = [...cartList];
-            qty = newQuantity
-        }
-        setCartList ([...newCart, {item: newItem, quantity:qty}]);
-        setMostrar(!mostrar);
-        };
+    const agregarItem = (item, quantity, mostrar, setMostrar) => {
+        console.log(cartList)
+        const index = cartList.findIndex(i => i.item.id === item.id)//-1, pos
+        console.log(index)
+    
+          if (index > -1) {
+            const oldQy = cartList[index].quantity
+    
+            cartList.splice(index, 1)
+            setCartList([...cartList, { item, quantity: quantity + oldQy}])
+          }
+          else {
+            setCartList([...cartList, {item, quantity}])
+          }
+          setMostrar(!mostrar);
+      }
+
+    // const agregarItem=(newItem, newQuantity, mostrar, setMostrar)=>{
+        // const evitarDuplicado = cartList.find((item) => {
+            // return item.item.nombre === newItem.nombre});
+        // let newCart;
+        // let qty;
+        // if(evitarDuplicado) {
+            // newCart = cartList.filter((item) => item.item.nombre !== newItem.nombre);
+            // qty = evitarDuplicado.quantity + newQuantity
+        // } else {
+            // newCart = [...cartList];
+            // qty = newQuantity
+        // }
+        // setCartList ([...newCart, {item: newItem, quantity:qty}]);
+        // setMostrar(!mostrar);
+        // };
+
+
+    
+
 
     const removerItem = (itemId) =>{
         let filtrarCarrito = cartList.filter((item) => item.item.nombre !== itemId);
@@ -88,8 +109,6 @@ function CartContextProvider({children}){
     
         setCartList([])
     }
-    
-    console.log(cartList);    
     return(
         <CartContext.Provider value= {{
             cartList,

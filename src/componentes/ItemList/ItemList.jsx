@@ -16,7 +16,7 @@ const ItemList = () => {
         alert("Algo fallo, intentelo de nuevo");
   }
 }, []);
- // console.log(productos)    
+  console.log(productos)    
 
     return (
         <div>

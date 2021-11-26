@@ -8,9 +8,11 @@ const ItemDetailContainer = ({nombre}) => {
   const [productos, setProductos] = useState([]);
   
 useEffect(() =>{
+
   const db = getFirestore()
   db.collection('productos').get()
-  .then(resp => setProductos(resp.docs.map( item => ({nombre: item.nombre, ...item.data()}))));
+  .then(resp => setProductos(resp.docs.map( item => ({id: item.id, ...item.data()}))));
+
 }, []);
 
    productoEncontrado = productos.find( item => item.nombre === nombre );
