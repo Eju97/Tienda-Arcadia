@@ -19,17 +19,17 @@ function Navbar() {
                 
                 <li className="nav-item">
                     <Link to={`/`}>
-                    <a className="nav-link " >INICIO</a>
+                    <a className="nav-link">INICIO</a>
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link to={`/productos`}>
-                    <a className="nav-link" href="#">PRODUCTOS</a>
+                    <a className="nav-link">PRODUCTOS</a>
                     </Link>
                 </li>
                 <li className="nav-item justify-content-end">
                     <Link to={`/cart`}>
-                <a className="nav-link" href="#"><CartWidget/></a>
+                <a className="nav-link"><CartWidget/></a>
                 </Link>
                 </li>
             </ul>

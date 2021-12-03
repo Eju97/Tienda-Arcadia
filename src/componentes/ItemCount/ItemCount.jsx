@@ -10,7 +10,7 @@ const ItemCount = ({item, initial, mostrar, setMostrar}) => {
     };
 
     const {agregarItem} = useCartContext()
-    const [show, setShow] = useState (true);
+    const [show] = useState (true);
 
     return (        
         <div>

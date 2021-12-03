@@ -4,9 +4,6 @@ import {Link} from 'react-router-dom';
 
 
 const Item = ({id, nombre, precio, stock, imagen}) => {
-    const onAdd = (clicks) => {
-        alert(`Agregaste ${clicks} ${nombre} al carrito al carrito`);
-    };
     
     return (      
             <div className="card text-center border-primary m-2" style={{width:"14rem"}}>                    

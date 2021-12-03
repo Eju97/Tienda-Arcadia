@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
 import ItemCount from '../ItemCount/ItemCount'
 import "./ItemDetail.css"
-import { useCartContext } from '../../context/cartContext';
 import { Link } from 'react-router-dom';
 
 
 const ItemDetail = ({item}) => {
-    const {cartList, agregarItem} = useCartContext()
       
     const onAdd = (clicks) => {
-    console.log(clicks);
       setShow(false);
 };
 
