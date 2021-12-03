@@ -1,46 +1,14 @@
 import React from 'react'
 import { useCartContext } from '../../context/cartContext'
 import { Link } from 'react-router-dom'
-import { getFirestore } from '../../data/getFirebase';
-import firebase from "firebase"
+import "./Cart.css"
 import 'firebase/firestore'
 
 const Cart = () => {
-    const {cartList, vaciarCarrito, removerItem, crearOrdenDePedido} = useCartContext()
-    console.log(cartList);
-
-    const generarOrden = () =>{
-        const db = getFirestore();
-      //  const ordersCol = db.collection('orders');
-        
-        let orden = {}        
-        orden.date = firebase.firestore.Timestamp.fromDate(new Date());
-
-        orden.buyer = { nombre: 'Ernesto', telefono: '3413601755', email: 'ejubessone@hotmail.com'}
-      //  orden.total = totalPrecio;
-      console.log(cartList)
-        orden.items = cartList.map(cartItem => {
-            const id = cartItem.item.id;
-            const titulo = cartItem.item.nombre;
-            const precio = cartItem.item.precio * cartItem.quantity;
-
-            return {id, titulo, precio}
-        })
-        console.log(orden)
-
-        const dbQuery = getFirestore()
-        const orderQuery = dbQuery.collection('orders')
-        orderQuery.add(orden)
-        .then(result => alert('el id de la compra es'+ result.id))
-        .catch(err => console.log(err))
-
-    }
-
-
-
+    const {cartList, vaciarCarrito, removerItem, crearOrdenDePedido, precioTotal} = useCartContext()
 
     return (
-        <div className="text-center">
+        <div className="text-center container fondito">
         <h1>Carrito</h1>
         <table className="table">
             <thead>
@@ -64,14 +32,15 @@ const Cart = () => {
                     <td className="m-1"><button onClick={()=>removerItem(item.item.nombre)}>X</button></td>
                     </tr>
                 </tbody>)}                
-        </table>        
-                <h1>TOTAL:{cartList.reduce(function(valorAnterior,ValorActual){
-                    return ValorActual.quantity*ValorActual.item.precio
-                },0)}</h1>
-                <button className="btn btn-warning botones" onClick={()=>vaciarCarrito()}>Vaciar Bolsita</button>
-                <button onClick={()=> crearOrdenDePedido(cartList)}>Terminar compra</button>
-                <button onClick={()=> generarOrden()}>COMPRAR</button>
+        </table> 
+                <hr />
+                <h1>TOTAL: $ {precioTotal()} </h1>
+                <div>
+                {cartList.length === 0 ? <div> <hr /> <h3>Parece que el carrito esta vacio, ve y compra algo</h3> <Link to="/productos"><button className="btn btn-info">SEGUIR COMPRANDO</button></Link></div> : null}                            
+                {cartList.length !== 0 && <button className="btn btn-warning botones" onClick={()=>vaciarCarrito()}>Vaciar Bolsita</button>}
+                {cartList.length !== 0 && <button className="btn btn-success" onClick={()=> crearOrdenDePedido(cartList)}>Terminar compra</button>}
                 
+                </div>               
         </div>
     );
                 };

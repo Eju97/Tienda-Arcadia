@@ -2,3 +2,13 @@
     font-size: 25px;
     border-spacing: 50px;
 }
+
+.fondoTitulo{
+    background: rgb(193,247,247);
+    background: linear-gradient(161deg, rgba(193,247,247,1) 14%, rgba(57,228,160,1) 57%);
+    
+}   
+
+.barraDeNavegacion{
+    background: #E8D0B3;
+}

@@ -1,11 +1,14 @@
 import React from 'react'
-import carritoLogo from "../Images/carritoLogo.png"
-
-const CartWidget = ({count}) => {
+import pouch from "../Images/pouch.png"
+import { useCartContext } from '../../context/cartContext'
+    
+const CartWidget = () => {
+    const {cartList} = useCartContext()
 
     return (
         <span>           
-            <img width="65px" src={carritoLogo} count={count} alt="logoDelCarrito"/>
+            
+            <img width="65px" src={pouch}  alt="logoDelCarrito"/><span>{cartList.length}</span>
         </span>
     )
 }

@@ -11,9 +11,7 @@ function CartContextProvider({children}){
     const [cartList, setCartList] = useState([])
 
     const agregarItem = (item, quantity, mostrar, setMostrar) => {
-        console.log(cartList)
         const index = cartList.findIndex(i => i.item.id === item.id)//-1, pos
-        console.log(index)
     
           if (index > -1) {
             const oldQy = cartList[index].quantity
@@ -26,25 +24,10 @@ function CartContextProvider({children}){
           }
           setMostrar(!mostrar);
       }
-
-    // const agregarItem=(newItem, newQuantity, mostrar, setMostrar)=>{
-        // const evitarDuplicado = cartList.find((item) => {
-            // return item.item.nombre === newItem.nombre});
-        // let newCart;
-        // let qty;
-        // if(evitarDuplicado) {
-            // newCart = cartList.filter((item) => item.item.nombre !== newItem.nombre);
-            // qty = evitarDuplicado.quantity + newQuantity
-        // } else {
-            // newCart = [...cartList];
-            // qty = newQuantity
-        // }
-        // setCartList ([...newCart, {item: newItem, quantity:qty}]);
-        // setMostrar(!mostrar);
-        // };
-
-
-    
+      
+    const precioTotal = () => {
+        return cartList.reduce((acum, valor)=>(acum + (valor.quantity * valor.item.precio)), 0) 
+    }    
 
 
     const removerItem = (itemId) =>{
@@ -55,18 +38,6 @@ function CartContextProvider({children}){
     function vaciarCarrito(){
         setCartList([])
     }
-
-    // const crearOrdenDePedido = () =>{
-
-    //     orden.buyer = { nombre: "Ernesto", telefono: "3413605555", email: "ejubessone@hotmail.com"}
-    //     orden.total = precioTotal();
-    //     orden.items = cartList.map(cartItem => {
-    //         const id = cartItem.item.id;
-    //         const nombre = cartItem.item.nombre;
-    //         const precio = cartItem.item.precio;
-
-    //         return {id, nombre, precio}
-    //     })   
     
 
      const crearOrdenDePedido = (orden) =>{
@@ -75,9 +46,9 @@ function CartContextProvider({children}){
          let items = []
 
          const user = {
-            name: 'Ernesto Bessone',
-            phone: 3413605555,
-            email: 'ejubessone@hotmail.com'
+            name: 'User',
+            phone: 3413601755,
+            email: 'example@hotmail.com'
         }
 
         const itemEnLaOrden = (orden) => {
@@ -89,20 +60,14 @@ function CartContextProvider({children}){
             return items
         }
 
-      //  const precio = () => {cartList.map(item => {
-      //      precioTotal += item.item.precio * item.cantidad
-      //      return precioTotal
-      //  })};
-
         const db = getFirestore();
         const dbOrders = db.collection('ordenes');
-       // precio()
      
         dbOrders.add({
             comprador: user,
             item: itemEnLaOrden(orden),
             fecha: firebase.firestore.Timestamp.fromDate(new Date()),
-           // total: precioTotal
+            total: precioTotal
         })
         .then( res => alert(`Su orden de compra es: ${res.id}`))
         .catch(err => console.log(err));
@@ -116,6 +81,7 @@ function CartContextProvider({children}){
             removerItem,
             vaciarCarrito,
             crearOrdenDePedido,
+            precioTotal,
         }}>
             {children}
         </CartContext.Provider>

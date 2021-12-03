@@ -1,31 +1,33 @@
 import React from 'react'
 import CartWidget from "../CartWidget/CartWidget"
+import logoArkadia from "../Images/logoArkadia.png"
 import "./Navbar.css"
 import {Link} from 'react-router-dom';
 
 function Navbar() {
     return (
         <nav className="agrandarFuente">
+            
+            <div className="container text-center fondoTitulo">
             <Link to={`/`}>
-            <h1 className="text-center">Tienda Arcadia</h1>
+            <img src={logoArkadia} alt="logo" />
             </Link>
-            <ul className="nav justify-content-center navbar-dark bg-dark">
+            </div>
+            
 
+            <ul className="nav justify-content-center barraDeNavegacion navbar-dark  container">
+                
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Inicio</a>
-                </li>
-                <li className="nav-item">
-                    <Link to={`/productos`}>
-                    <a className="nav-link" href="#">Productos</a>
+                    <Link to={`/`}>
+                    <a className="nav-link " >INICIO</a>
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Sobre Nosotros</a>
+                    <Link to={`/productos`}>
+                    <a className="nav-link" href="#">PRODUCTOS</a>
+                    </Link>
                 </li>
-                <li className="nav-item">                
-                    <a className="nav-link" href="#">Contacto</a>                    
-                </li>
-                <li className="nav-item">
+                <li className="nav-item justify-content-end">
                     <Link to={`/cart`}>
                 <a className="nav-link" href="#"><CartWidget/></a>
                 </Link>

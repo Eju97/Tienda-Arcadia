@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ItemDetail from '../ItemDetail/ItemDetail';
+import "./ItemDetailContainer.css"
 import { getFirestore } from '../../data/getFirebase';
 
 const ItemDetailContainer = ({nombre}) => {  
@@ -17,7 +18,7 @@ useEffect(() =>{
 
    productoEncontrado = productos.find( item => item.nombre === nombre );
        return (
-        <div className="container text-center">
+        <div className="container centrarItem text-center">
            {productoEncontrado && <ItemDetail item={productoEncontrado}/>}
         </div>
     );

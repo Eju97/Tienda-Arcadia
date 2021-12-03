@@ -15,11 +15,10 @@ const ItemList = () => {
         catch (error) {
         alert("Algo fallo, intentelo de nuevo");
   }
-}, []);
-  console.log(productos)    
+}, []);   
 
     return (
-        <div>
+        <div className="card-group justify-content-center">
             {
             productos.length ? (
                 <>
